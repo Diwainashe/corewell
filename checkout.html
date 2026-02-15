@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout – CoreWell</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1tpMvN0ZrtCBf3Hyqc1D/AuoMtToyJRzvXwB23EFc+5mVUXqyjddpL5my37wBIdWwV4xLyKhKYo3NAw15XTHiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .checkout-container {
+            padding: 4rem 0;
+        }
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .order-summary {
+            background: var(--grey);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .order-summary h3,
+        .checkout-form h3 {
+            margin-bottom: 1rem;
+            font-family: var(--heading-font);
+            color: var(--deep-green);
+        }
+        .checkout-form {
+            background: var(--grey);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .checkout-form .form-group {
+            margin-bottom: 1rem;
+        }
+        .checkout-form label {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .checkout-form input,
+        .checkout-form textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Placeholder for shared header -->
+    <div id="header"></div>
+    <main>
+        <div class="container checkout-container">
+            <h2>Checkout</h2>
+            <div class="checkout-grid">
+                <div class="order-summary">
+                    <h3>Your Order</h3>
+                    <div id="order-items"></div>
+                    <p class="cart-total">Total: R<span id="order-total">0.00</span></p>
+                </div>
+                <div class="checkout-form">
+                    <h3>Shipping Details</h3>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Delivery Address</label>
+                            <textarea id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="checkout-email" required>
+                        </div>
+                        <button type="submit" class="btn primary" style="width:100%;">Pay Securely</button>
+                    </form>
+                    <p style="font-size:0.9rem;margin-top:1rem;">You will be redirected to our payment partner to complete your purchase securely.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Placeholder for shared footer -->
+    <div id="footer"></div>
+    <!-- JavaScript modules -->
+    <script type="module" src="js/components.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <!-- Module specific to the checkout page -->
+    <script type="module" src="js/checkoutPage.js"></script>
+</body>
+</html>
