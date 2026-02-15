@@ -1,0 +1,28 @@
+<!-- Shared header component
+
+This file contains the navigation bar used throughout the site. It is loaded
+dynamically by the pages using js/components.js to avoid duplication. The
+navigation includes links to the main pages as well as a cart indicator and
+login/logout link which will be updated by JavaScript based on the user’s
+authentication state.
+-->
+
+<header>
+    <div class="container nav-container">
+        <a href="index.html" class="brand">Core<span class="highlight">Well</span></a>
+        <!-- Mobile menu toggle -->
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Education</a></li>
+                <li><a href="stockist.html">Stockists</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fas fa-shopping-bag"></i><span id="cart-count" class="cart-count">0</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
