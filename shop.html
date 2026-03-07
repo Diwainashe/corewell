@@ -1,96 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop – CoreWell Wellness</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1tpMvN0ZrtCBf3Hyqc1D/AuoMtToyJRzvXwB23EFc+5mVUXqyjddpL5my37wBIdWwV4xLyKhKYo3NAw15XTHiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop – CoreWell Wellness</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-    <!-- Placeholder for shared header -->
-    <div id="header"></div>
+<div id="header"></div>
+<main>
+  <div class="page-banner">
+    <p class="eyebrow light center">Our Products</p>
+    <h1>Shop <em>Wellness Shots</em></h1>
+    <p>Discover our range of plant-powered wellness shots. Each one crafted for a specific purpose.</p>
+  </div>
 
-    <main>
-        <section class="shop-page">
-            <div class="container">
-                <h2>Shop Wellness Shots</h2>
-                <p>Discover our range of plant‑powered wellness shots. Click on a product to learn more.</p>
-                <div class="product-grid">
-                    <div class="product-card" data-product="glow-boost">
-                        <a href="glow-boost.html">
-                            <img src="images/glow_boost.jpg" alt="Glow Boost wellness shot">
-                            <h3>Glow Boost</h3>
-                            <p class="subtitle">Glowing skin &amp; inflammation support</p>
-                            <p class="ingredients">Turmeric | Ginger | Lemon</p>
-                        </a>
-                        <button class="btn primary add-to-cart" data-id="glow-boost">Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-product="colon-cleanse">
-                        <a href="colon-cleanse.html">
-                            <img src="images/colon_cleanse.jpg" alt="Colon Cleanse wellness shot">
-                            <h3>Colon Cleanse</h3>
-                            <p class="subtitle">Debloat + gut reset</p>
-                            <p class="ingredients">Celery | Green apple | Spinach</p>
-                        </a>
-                        <button class="btn primary add-to-cart" data-id="colon-cleanse">Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-product="iron-boost">
-                        <a href="iron-boost.html">
-                            <img src="images/iron_boost.jpg" alt="Iron Boost wellness shot">
-                            <h3>Iron Boost</h3>
-                            <p class="subtitle">Energy &amp; blood health</p>
-                            <p class="ingredients">Beetroot | Carrot | Orange</p>
-                        </a>
-                        <button class="btn primary add-to-cart" data-id="iron-boost">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Subscription section anchor for Shop page -->
-        <section id="subscriptions" class="subscription">
-            <div class="container">
-                <h2>Subscription Plans</h2>
-                <p>Stay consistent with your wellness routine by subscribing to one of our plans.</p>
-                <div class="subscription-options">
-                    <div class="option">
-                        <h3>Weekly Shot Subscription</h3>
-                        <p>Receive four wellness shots every week.</p>
-                    </div>
-                    <div class="option">
-                        <h3>Monthly Glow Subscription</h3>
-                        <p>30 shots delivered monthly at a discounted rate.</p>
-                    </div>
-                    <div class="option">
-                        <h3>7‑Day Cleanse Kit</h3>
-                        <p>A one‑week reset package.</p>
-                    </div>
-                    <div class="option">
-                        <h3>30‑Day Glow Reset</h3>
-                        <p>Full month of wellness shots for long‑term benefits.</p>
-                    </div>
-                </div>
-                <div class="subscription-benefits">
-                    <ul>
-                        <li>Discounted pricing</li>
-                        <li>Priority delivery</li>
-                        <li>Exclusive drops</li>
-                    </ul>
-                    <button id="subscribe-btn" class="btn primary">Subscribe Now</button>
-                </div>
-            </div>
-        </section>
-    </main>
+  <section class="products-section" style="padding-top:64px;">
+    <div class="product-grid" style="max-width:1100px;margin:0 auto 48px;">
+      <div class="product-card reveal">
+        <a href="glow-boost.html">
+          <div class="product-img">
+            <img src="images/glow_boost.jpg" alt="Glow Boost"
+              onerror="this.src='https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-gold">Bestseller</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#C47D0A;"></div>
+            <h3>Glow Boost</h3>
+            <p class="subtitle">Glowing skin &amp; inflammation support</p>
+            <p class="ingredients">Turmeric · Ginger · Lemon</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart" data-id="glow-boost">Add to Cart</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- Placeholder for shared footer -->
-    <div id="footer"></div>
+      <div class="product-card reveal" style="transition-delay:.08s">
+        <a href="colon-cleanse.html">
+          <div class="product-img">
+            <img src="images/colon_cleanse.jpg" alt="Colon Cleanse"
+              onerror="this.src='https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-green">Gut Health</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#2D6A4F;"></div>
+            <h3>Colon Cleanse</h3>
+            <p class="subtitle">Debloat + gut reset</p>
+            <p class="ingredients">Celery · Green Apple · Spinach</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart green" data-id="colon-cleanse">Add to Cart</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- JavaScript modules -->
-    <script type="module" src="js/components.js"></script>
-    <script type="module" src="js/app.js"></script>
-    <!-- Subscription handler -->
-    <script type="module" src="js/subscription.js"></script>
+      <div class="product-card reveal" style="transition-delay:.16s">
+        <a href="iron-boost.html">
+          <div class="product-img">
+            <img src="images/iron_boost.jpg" alt="Iron Boost"
+              onerror="this.src='https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-red">Energy</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#7B1D1D;"></div>
+            <h3>Iron Boost</h3>
+            <p class="subtitle">Energy &amp; blood health</p>
+            <p class="ingredients">Beetroot · Carrot · Orange</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart red" data-id="iron-boost">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscriptions -->
+  <section class="subscription" id="subscriptions">
+    <div class="sub-inner">
+      <div class="sub-text reveal">
+        <p class="eyebrow light">Subscription Plans</p>
+        <h2 class="section-title light" style="margin:10px 0 16px;">Stay Consistent,<br/><em>Glow Consistently</em></h2>
+        <p class="sub-body">Subscribe to one of our plans and never run out of your daily wellness ritual.</p>
+        <ul class="sub-perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Discounted pricing</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority delivery</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Exclusive drops</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime</li>
+        </ul>
+      </div>
+      <div class="plan-cards reveal" style="transition-delay:.15s">
+        <div class="plan-card popular">
+          <span class="plan-badge">Most Popular</span>
+          <h3>Weekly Plan</h3>
+          <p>Receive four wellness shots every week</p>
+          <div class="plan-price">R299 <span>/week</span></div>
+          <button class="btn-sub" id="subscribe-btn" data-plan="Weekly Plan" data-price="299">Subscribe Now</button>
+        </div>
+        <div class="plan-card">
+          <h3>Monthly Kit</h3>
+          <p>30 shots delivered monthly at a discount</p>
+          <div class="plan-price">R899 <span>/month</span></div>
+          <button class="btn-sub ghost sub-plan-btn" data-plan="Monthly Kit" data-price="899">Subscribe Now</button>
+        </div>
+        <div class="plan-card">
+          <h3>7-Day Cleanse</h3>
+          <p>A one-week reset package</p>
+          <div class="plan-price">R249 <span>/once</span></div>
+          <button class="btn-sub ghost sub-plan-btn" data-plan="7-Day Cleanse" data-price="249">Get Kit</button>
+        </div>
+        <div class="plan-card">
+          <h3>30-Day Glow Reset</h3>
+          <p>Full month of wellness shots for lasting results</p>
+          <div class="plan-price">R1,199 <span>/month</span></div>
+          <button class="btn-sub ghost sub-plan-btn" data-plan="30-Day Glow Reset" data-price="1199">Get Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="footer"></div>
+<div id="toast"></div>
+<script type="module" src="js/components.js"></script>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/subscription.js"></script>
 </body>
 </html>

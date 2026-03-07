@@ -1,44 +1,40 @@
 /*
-  Stockist form handler
-
-  This module attaches a submit handler to the stockist request form.
-  When the user submits the form, it prevents the default browser
-  submission, collects the form fields and writes them to the
-  Firestore “stockistRequests” collection. A timestamp is included so
-  that submissions can be sorted chronologically. After saving the
-  request, the form is reset and a thank-you alert is shown. If an
-  error occurs during saving, the user is notified. Users do not
-  need to be logged in to submit a stockist request.
-
-  To use this module, give the form element the ID “stockist-form”
-  and include this script as a module. Ensure that firebase.js is
-  loaded before this script.
+  stockist.js – submits stockist enquiry to Firestore.
+  Uses toast notifications instead of alerts.
 */
 
 import { db, collection, addDoc, serverTimestamp } from './firebase.js';
 
+function toast(msg) {
+  if (window.showToast) { window.showToast(msg); return; }
+  const el = document.getElementById('toast');
+  if (el) { el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 3200); }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('stockist-form');
   if (!form) return;
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const company = document.getElementById('company').value;
-    const message = document.getElementById('message').value;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Submitting…'; btn.disabled = true;
     try {
       await addDoc(collection(db, 'stockistRequests'), {
-        name,
-        email,
-        company,
-        message,
+        name, email, company, message,
         createdAt: serverTimestamp(),
       });
-      alert('Thank you! We will contact you soon.');
+      toast('Thank you! We\'ll be in touch within 48 hours 🌿');
       form.reset();
-    } catch (error) {
-      console.error('Error submitting stockist request:', error);
-      alert('Failed to submit your request. Please try again later.');
+    } catch (err) {
+      console.error('Stockist submission error:', err);
+      toast('Submission failed. Please try again.');
+    } finally {
+      btn.textContent = 'Submit Enquiry'; btn.disabled = false;
     }
   });
 });

@@ -1,204 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--
-      CoreWell e‑commerce homepage
-
-      This file defines the landing page for the CoreWell wellness brand. It
-      incorporates the visual direction outlined in the provided concept document
-      with deep green and turmeric highlights, Playfair Display headings and
-      Montserrat body copy. The page includes a hero section, explanation of
-      CoreWell’s purpose, a best‑selling product showcase, an educational
-      section, subscription options, ingredient highlights, testimonials and a
-      final call to action. Navigation links direct users to other pages such as
-      the shop, blog, stockist, login and cart pages. The JavaScript file
-      (js/app.js) handles interactive elements like the mobile navigation
-      toggle, adding products to the cart and updating the cart counter.
-    -->
-    <title>CoreWell Wellness Shots – Glow from Within</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Icon library for navigation/cart icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1tpMvN0ZrtCBf3Hyqc1D/AuoMtToyJRzvXwB23EFc+5mVUXqyjddpL5my37wBIdWwV4xLyKhKYo3NAw15XTHiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CoreWell plant-powered wellness shots for glowing skin, gut health and daily vitality. Rooted in African ingredients."/>
+  <title>CoreWell – Drink Your Skin Supplements</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-    <!-- Placeholder for shared header -->
-    <div id="header"></div>
+<div id="header"></div>
+<main>
 
-    <main>
-        <!-- Hero section -->
-        <section class="hero">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <h1>Drink Your Skin Supplements</h1>
-                    <p class="subtext">Plant‑powered wellness shots for glowing skin, gut health and daily vitality.<br>Rooted in African ingredients. Made for modern life.</p>
-                    <div class="hero-buttons">
-                        <a href="shop.html" class="btn primary">Shop Wellness Shots</a>
-                        <a href="#subscription" class="btn secondary">Start Your Glow Routine</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="images/hero.jpg" alt="Woman holding a wellness shot" />
-                </div>
-            </div>
-        </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow reveal">Plant-Powered Wellness</p>
+      <h1 class="reveal" style="transition-delay:.1s">Drink Your<br/><em>Skin Supplements</em></h1>
+      <p class="sub reveal" style="transition-delay:.2s">
+        Rooted in African ingredients. Made for modern life.<br/>One shot a day. Real results.
+      </p>
+      <div class="hero-pills reveal" style="transition-delay:.3s">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Clearer Skin</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Less Bloating</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>More Energy</span>
+      </div>
+      <div class="hero-btns reveal" style="transition-delay:.4s">
+        <a href="shop.html" class="btn-p">Shop Wellness Shots</a>
+        <a href="#subscriptions" class="btn-o">Start Your Glow Routine</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal" style="transition-delay:.25s">
+      <div class="hero-img-wrap">
+        <img src="images/hero.jpg" alt="CoreWell wellness shot"
+          onerror="this.src='https://images.unsplash.com/photo-1622484213077-62b6a8e13e9e?w=700&auto=format&fit=crop&q=80'"/>
+        <div class="hero-badge">
+          <span class="num">180+</span>
+          <span class="lbl">5-star reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Why CoreWell exists -->
-        <section class="why-corewell">
-            <div class="container">
-                <h2>Why CoreWell Exists</h2>
-                <p>Most skincare treats the outside. CoreWell treats the inside first. When your gut is balanced and your body nourished:</p>
-                <ul class="benefits-list">
-                    <li>Skin clears</li>
-                    <li>Bloating reduces</li>
-                    <li>Energy improves</li>
-                    <li>Confidence rises</li>
-                </ul>
-                <p>Daily wellness should be simple. That’s why we created CoreWell.</p>
-                <img src="images/why.jpg" alt="Woman with glowing skin" class="why-image" />
-            </div>
-        </section>
+  <!-- WHY COREWELL -->
+  <section class="why-section">
+    <div class="why-inner">
+      <div class="why-text reveal">
+        <p class="eyebrow">Why CoreWell</p>
+        <h2 class="section-title">Most skincare<br/>treats the outside.<br/><em>We go deeper.</em></h2>
+        <p class="why-body">CoreWell treats the inside first. When your gut is balanced and your body nourished — your skin, energy and confidence naturally follow.</p>
+        <ul class="why-list">
+          <li><span class="dot dot-g"></span>Skin clears naturally</li>
+          <li><span class="dot dot-gr"></span>Bloating reduces</li>
+          <li><span class="dot dot-r"></span>Energy improves daily</li>
+          <li><span class="dot dot-g"></span>Confidence rises</li>
+        </ul>
+        <a href="shop.html" class="btn-sm">Explore Products</a>
+      </div>
+      <div class="why-img-wrap reveal" style="transition-delay:.15s">
+        <img src="images/why.jpg" alt="Wellness ingredients"
+          onerror="this.src='https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format&fit=crop&q=80'"/>
+        <div class="why-float">
+          <p class="stat">1 shot</p>
+          <p class="lbl">per day. Real results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Bestseller products -->
-        <section class="bestsellers">
-            <div class="container">
-                <h2>Shop Bestsellers</h2>
-                <div class="product-grid">
-                    <!-- Product cards. Each card references the data-product attribute for JavaScript to read details -->
-                    <div class="product-card" data-product="glow-boost">
-                        <img src="images/glow_boost.jpg" alt="Glow Boost wellness shot">
-                        <h3>Glow Boost</h3>
-                        <p class="subtitle">For glowing skin &amp; inflammation support</p>
-                        <p class="ingredients">Turmeric | Ginger | Lemon</p>
-                        <button class="btn primary add-to-cart" data-id="glow-boost">Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-product="colon-cleanse">
-                        <img src="images/colon_cleanse.jpg" alt="Colon Cleanse wellness shot">
-                        <h3>Colon Cleanse</h3>
-                        <p class="subtitle">Debloat + gut reset</p>
-                        <p class="ingredients">Celery | Green apple | Spinach</p>
-                        <button class="btn primary add-to-cart" data-id="colon-cleanse">Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-product="iron-boost">
-                        <img src="images/iron_boost.jpg" alt="Iron Boost wellness shot">
-                        <h3>Iron Boost</h3>
-                        <p class="subtitle">Energy &amp; blood health</p>
-                        <p class="ingredients">Beetroot | Carrot | Orange</p>
-                        <button class="btn primary add-to-cart" data-id="iron-boost">Add to Cart</button>
-                    </div>
-                </div>
-                <a href="shop.html" class="btn secondary shop-all">Shop All Products</a>
-            </div>
-        </section>
+  <!-- SHOP BESTSELLERS -->
+  <section class="products-section">
+    <div class="section-head reveal">
+      <p class="eyebrow center">Bestsellers</p>
+      <h2 class="section-title" style="margin:8px 0 12px;">Shop Our <em>Glow Collection</em></h2>
+      <p class="section-sub">Plant-based. Cold-pressed. Designed to work from within.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card reveal" style="transition-delay:.05s">
+        <a href="glow-boost.html">
+          <div class="product-img">
+            <img src="images/glow_boost.jpg" alt="Glow Boost"
+              onerror="this.src='https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-gold">Bestseller</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#C47D0A;"></div>
+            <h3>Glow Boost</h3>
+            <p class="subtitle">For glowing skin &amp; inflammation support</p>
+            <p class="ingredients">Turmeric · Ginger · Lemon</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart" data-id="glow-boost">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal" style="transition-delay:.1s">
+        <a href="colon-cleanse.html">
+          <div class="product-img">
+            <img src="images/colon_cleanse.jpg" alt="Colon Cleanse"
+              onerror="this.src='https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-green">Gut Health</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#2D6A4F;"></div>
+            <h3>Colon Cleanse</h3>
+            <p class="subtitle">Debloat + gut reset</p>
+            <p class="ingredients">Celery · Green Apple · Spinach</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart green" data-id="colon-cleanse">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card reveal" style="transition-delay:.15s">
+        <a href="iron-boost.html">
+          <div class="product-img">
+            <img src="images/iron_boost.jpg" alt="Iron Boost"
+              onerror="this.src='https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&auto=format&fit=crop&q=80'"/>
+            <span class="product-tag tag-red">Energy</span>
+          </div>
+          <div class="product-info">
+            <div class="product-dot" style="background:#7B1D1D;"></div>
+            <h3>Iron Boost</h3>
+            <p class="subtitle">Energy &amp; blood health</p>
+            <p class="ingredients">Beetroot · Carrot · Orange</p>
+          </div>
+        </a>
+        <div class="product-info" style="padding-top:0;">
+          <div class="product-bottom">
+            <span class="price">R89 <span>/ shot</span></span>
+            <button class="add-to-cart red" data-id="iron-boost">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="products-cta reveal"><a href="shop.html" class="btn-o">View All Products</a></div>
+  </section>
 
-        <!-- How It Works -->
-        <section class="how-it-works">
-            <div class="container">
-                <h2>How It Works</h2>
-                <p>Your skin reflects your internal health. Poor digestion and inflammation result in dull skin, bloating and low energy. Drinking plant‑based wellness shots daily:</p>
-                <ul class="benefits-list">
-                    <li>Floods your body with nutrients</li>
-                    <li>Supports digestion</li>
-                    <li>Reduces inflammation</li>
-                    <li>Supports a natural glow</li>
-                </ul>
-                <p>One shot a day. Real results.</p>
-                <img src="images/how_it_works.jpg" alt="Infographic showing gut to skin glow" class="how-image" />
-            </div>
-        </section>
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="section-head reveal">
+        <p class="eyebrow light center">The Science</p>
+        <h2 class="section-title light" style="margin:8px 0;">How It <em>Works</em></h2>
+      </div>
+      <div class="how-steps reveal" style="transition-delay:.1s">
+        <div class="how-step"><div class="step-num">01</div><div class="step-icon">🌿</div><h4>Drink One Shot Daily</h4><p>Cold-pressed nutrients absorb fastest on an empty stomach in the morning.</p></div>
+        <div class="how-arrow">→</div>
+        <div class="how-step"><div class="step-num">02</div><div class="step-icon">💧</div><h4>Nourish From Within</h4><p>Plant nutrients enter the bloodstream within 20 minutes, supporting your gut and cells.</p></div>
+        <div class="how-arrow">→</div>
+        <div class="how-step"><div class="step-num">03</div><div class="step-icon">✨</div><h4>Real Results</h4><p>Skin clears. Bloating reduces. Energy rises. Your natural glow becomes visible.</p></div>
+      </div>
+      <div class="how-tagline reveal" style="transition-delay:.2s">
+        <p>Your skin reflects your internal health. <strong>One shot a day. Real results.</strong></p>
+      </div>
+    </div>
+  </section>
 
-        <!-- Subscription section -->
-        <section id="subscription" class="subscription">
-            <div class="container">
-                <h2>Never Run Out of Your Glow</h2>
-                <p>Your glow is a daily ritual. Subscribe and stay consistent.</p>
-                <div class="subscription-options">
-                    <div class="option">
-                        <h3>Weekly Shot Subscription</h3>
-                        <p>Four bottles delivered every week. Perfect for busy schedules.</p>
-                    </div>
-                    <div class="option">
-                        <h3>Monthly Glow Subscription</h3>
-                        <p>Daily shots for an entire month. Save money and time.</p>
-                    </div>
-                    <div class="option">
-                        <h3>7‑Day Cleanse Kit</h3>
-                        <p>Kick‑start your wellness journey with a focused cleanse.</p>
-                    </div>
-                    <div class="option">
-                        <h3>30‑Day Glow Reset</h3>
-                        <p>A complete reset for lasting results.</p>
-                    </div>
-                </div>
-                <div class="subscription-benefits">
-                    <ul>
-                        <li>Discounted pricing</li>
-                        <li>Priority delivery</li>
-                        <li>Exclusive drops</li>
-                    </ul>
-                    <a href="shop.html#subscriptions" class="btn primary">Subscribe Now</a>
-                </div>
-                <img src="images/subscription.jpg" alt="Fridge stocked with bottles" class="subscription-image" />
-            </div>
-        </section>
+  <!-- SUBSCRIPTION -->
+  <section class="subscription" id="subscriptions">
+    <div class="sub-inner">
+      <div class="sub-text reveal">
+        <p class="eyebrow light">Subscribe &amp; Save</p>
+        <h2 class="section-title light" style="margin:10px 0 16px;">Never Run Out<br/>of Your <em>Glow</em></h2>
+        <p class="sub-body">Your glow is a daily ritual. Subscribe and stay consistent. Save money. Get priority delivery.</p>
+        <ul class="sub-perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Discounted pricing on every order</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority delivery to your door</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Exclusive new product drops</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime — no lock-in</li>
+        </ul>
+      </div>
+      <div class="plan-cards reveal" style="transition-delay:.15s">
+        <div class="plan-card popular">
+          <span class="plan-badge">Most Popular</span>
+          <h3>Weekly Plan</h3>
+          <p>4 shots per week delivered fresh</p>
+          <div class="plan-price">R299 <span>/week</span></div>
+          <button class="btn-sub" id="subscribe-btn" data-plan="Weekly Plan" data-price="299">Subscribe Now</button>
+        </div>
+        <div class="plan-card">
+          <h3>Monthly Kit</h3>
+          <p>30 shots for the full month</p>
+          <div class="plan-price">R899 <span>/month</span></div>
+          <button class="btn-sub ghost sub-plan-btn" data-plan="Monthly Kit" data-price="899">Subscribe Now</button>
+        </div>
+        <div class="plan-card">
+          <h3>7-Day Cleanse</h3>
+          <p>Kickstart your wellness journey</p>
+          <div class="plan-price">R249 <span>/once</span></div>
+          <button class="btn-sub ghost sub-plan-btn" data-plan="7-Day Cleanse" data-price="249">Get Kit</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- African Plant Power -->
-        <section class="plant-power">
-            <div class="container">
-                <h2>African Plant Power</h2>
-                <p>Powered by ingredients trusted for generations:</p>
-                <ul class="ingredients-list">
-                    <li>Turmeric</li>
-                    <li>Ginger</li>
-                    <li>Beetroot</li>
-                    <li>Leafy greens</li>
-                </ul>
-                <p>Ancient African plant wisdom meets modern wellness science.</p>
-                <img src="images/ingredients.jpg" alt="Turmeric, ginger, beetroot and greens" class="plant-image" />
-            </div>
-        </section>
+  <!-- PLANT POWER -->
+  <section class="plant-power">
+    <div class="plant-inner">
+      <div class="section-head reveal">
+        <p class="eyebrow center">Our Roots</p>
+        <h2 class="section-title" style="margin:8px 0 12px;">African Plant <em>Power</em></h2>
+        <p class="section-sub">Ancient ingredients trusted for generations. Modern wellness science.</p>
+      </div>
+      <div class="ingredients-grid reveal" style="transition-delay:.1s">
+        <div class="ingredient-item"><div class="emoji">🌿</div><h4>Turmeric</h4><p>Anti-inflammatory powerhouse. Fights skin inflammation and supports gut health.</p></div>
+        <div class="ingredient-item"><div class="emoji">🫚</div><h4>Ginger</h4><p>Digestive fire. Reduces bloating and nausea, boosts circulation and immunity.</p></div>
+        <div class="ingredient-item"><div class="emoji">🫀</div><h4>Beetroot</h4><p>Blood builder. Packed with iron, nitrates and antioxidants for lasting energy.</p></div>
+        <div class="ingredient-item"><div class="emoji">🌱</div><h4>Moringa</h4><p>Africa's miracle tree. Over 90 nutrients including vitamins A, C, E and iron.</p></div>
+      </div>
+      <div class="plant-img-wrap reveal" style="transition-delay:.2s">
+        <img src="images/ingredients.jpg" alt="African ingredients flatlay"
+          onerror="this.src='https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=1100&auto=format&fit=crop&q=80'"/>
+        <div class="plant-caption">Turmeric · Ginger · Beetroot · Moringa</div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Testimonials / Social proof -->
-        <section class="testimonials">
-            <div class="container">
-                <h2>What Our Customers Say</h2>
-                <div class="testimonial-grid">
-                    <div class="testimonial">
-                        <p>“Reduced my bloating in 3 days.”</p>
-                        <span>– Aisha</span>
-                    </div>
-                    <div class="testimonial">
-                        <p>“My skin is glowing.”</p>
-                        <span>– Zanele</span>
-                    </div>
-                    <div class="testimonial">
-                        <p>“I feel lighter and more energetic.”</p>
-                        <span>– Lerato</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-head reveal">
+      <p class="eyebrow center">Social Proof</p>
+      <h2 class="section-title" style="margin:8px 0;">Real Results, <em>Real Glow</em></h2>
+    </div>
+    <div class="testimonials-track reveal" style="transition-delay:.1s">
+      <div class="testimonials-inner" id="testimonialsInner">
+        <div class="testimonial"><div class="t-stars">★★★★★</div><p class="t-text">"Reduced my bloating in 3 days. I couldn't believe it was that fast. My stomach feels completely different."</p><div class="t-author"><div class="t-avatar" style="background:#C47D0A;">A</div><div><strong>Aisha M.</strong><span>Johannesburg</span></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><p class="t-text">"My skin is glowing. People keep asking what I'm doing differently. It's just CoreWell every morning."</p><div class="t-author"><div class="t-avatar" style="background:#2D6A4F;">Z</div><div><strong>Zanele N.</strong><span>Cape Town</span></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><p class="t-text">"I feel lighter and more energetic. The Iron Boost is incredible — finally getting through the day without a crash."</p><div class="t-author"><div class="t-avatar" style="background:#7B1D1D;">L</div><div><strong>Lerato K.</strong><span>Pretoria</span></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><p class="t-text">"Been on the weekly subscription for 2 months. My skin texture has completely transformed. Worth every cent."</p><div class="t-author"><div class="t-avatar" style="background:#5C4033;">T</div><div><strong>Thandi B.</strong><span>Durban</span></div></div></div>
+        <div class="testimonial"><div class="t-stars">★★★★★</div><p class="t-text">"The Glow Boost is my morning ritual. I love knowing I'm starting the day right with real African ingredients."</p><div class="t-author"><div class="t-avatar" style="background:#556B2F;">N</div><div><strong>Nomsa D.</strong><span>East London</span></div></div></div>
+      </div>
+    </div>
+    <div class="t-nav">
+      <button onclick="scrollTestimonials(-1)" aria-label="Previous">←</button>
+      <button onclick="scrollTestimonials(1)" aria-label="Next">→</button>
+    </div>
+  </section>
 
-        <!-- Final call to action -->
-        <section class="final-cta">
-            <div class="container final-cta-content">
-                <h2>Start Your Glow From Within</h2>
-                <div class="final-cta-buttons">
-                    <a href="shop.html" class="btn primary">Shop Now</a>
-                    <a href="shop.html#subscriptions" class="btn secondary">Subscribe</a>
-                    <a href="blog.html" class="btn tertiary">Join Community</a>
-                </div>
-            </div>
-        </section>
-    </main>
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner reveal">
+      <p class="eyebrow light center">Start Today</p>
+      <h2>Start Your Glow<br/><em>From Within</em></h2>
+      <p class="sub">Your skin is waiting. Your gut is waiting. Your energy is waiting.</p>
+      <div class="final-btns">
+        <a href="shop.html" class="btn-gold">Shop Now</a>
+        <a href="#subscriptions" class="btn-o-light">Subscribe &amp; Save</a>
+        <a href="blog.html" class="btn-o-light">Join Community</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Placeholder for shared footer -->
-    <div id="footer"></div>
-
-    <!-- JavaScript modules -->
-    <script type="module" src="js/components.js"></script>
-    <script type="module" src="js/app.js"></script>
+</main>
+<div id="footer"></div>
+<div id="toast"></div>
+<script type="module" src="js/components.js"></script>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/subscription.js"></script>
 </body>
 </html>

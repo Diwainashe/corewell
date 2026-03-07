@@ -1,184 +1,205 @@
 /*
-  CoreWell JavaScript
-
-  This script handles common behaviours across the CoreWell site:
-  - toggling the mobile navigation on small screens
-  - updating the year in the footer
-  - keeping track of the cart using localStorage and updating the cart counter
-  - handling Add to Cart interactions on product cards
-  - switching between login and logout depending on user authentication status
-
-  Note: In a production environment authentication and cart management should
-  happen on a secure server. This implementation is only intended for
-  demonstration and local development purposes.
+  CoreWell app.js
+  - Scroll reveal animations
+  - Sticky nav
+  - Mobile nav toggle
+  - Cart (localStorage + Firestore sync)
+  - Auth state (login/logout link)
+  - Toast notifications
+  - Testimonials carousel
+  - Footer year
 */
-
-// Use an ES module to allow imports. This script manages global site
-// behaviours including navigation toggling, updating the year, cart
-// interactions and authentication state via Firebase.
 
 import { auth, onAuthStateChanged, signOut, db, doc, getDoc, setDoc } from './firebase.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Set current year in footer
-  const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+// ─── PRODUCTS CATALOGUE ──────────────────────────────────────────
+const PRODUCTS = [
+  { id: 'glow-boost',    name: 'Glow Boost',    price: 89 },
+  { id: 'colon-cleanse', name: 'Colon Cleanse', price: 89 },
+  { id: 'iron-boost',    name: 'Iron Boost',    price: 89 },
+];
 
-  // Mobile navigation toggling
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navList = document.querySelector('.main-nav ul');
-  if (menuToggle && navList) {
-    menuToggle.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
-  }
+// ─── CART STATE ───────────────────────────────────────────────────
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem('corewellCart')) || []; }
+catch { cart = []; }
 
-  // Product definitions. In a real application this would be fetched
-  // from an API or database. Prices are placeholders.
-  const products = [
-    { id: 'glow-boost', name: 'Glow Boost', price: 59.99 },
-    { id: 'colon-cleanse', name: 'Colon Cleanse', price: 59.99 },
-    { id: 'iron-boost', name: 'Iron Boost', price: 59.99 },
-  ];
+// ─── TOAST ────────────────────────────────────────────────────────
+let toastTimer;
+window.showToast = function(msg) {
+  const el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+};
 
-  // Retrieve cart from localStorage or initialize empty
-  let cart = [];
+// ─── CART COUNT ───────────────────────────────────────────────────
+function updateCartCount() {
+  const total = cart.reduce((a, b) => a + b.quantity, 0);
+  document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
+    if (el) el.textContent = total > 0 ? total : (el.id === 'mobile-cart-count' ? '' : '0');
+  });
+}
+
+// ─── FIRESTORE SYNC ───────────────────────────────────────────────
+async function syncCartToFirestore() {
+  const user = auth.currentUser;
+  if (!user) return;
+  try { await setDoc(doc(db, 'carts', user.uid), { items: cart }); }
+  catch (e) { console.error('Cart sync failed:', e); }
+}
+
+async function loadUserCart(user) {
   try {
-    const stored = localStorage.getItem('corewellCart');
-    cart = stored ? JSON.parse(stored) : [];
-  } catch (err) {
-    cart = [];
-  }
-
-  /**
-   * Load the authenticated user’s cart from Firestore. When a user
-   * logs in, this will replace the local cart with the server version.
-   * If no cart exists in Firestore for the user, one will be created.
-   */
-  async function loadUserCart(user) {
-    try {
-      const cartDocRef = doc(db, 'carts', user.uid);
-      const snap = await getDoc(cartDocRef);
-      if (snap.exists()) {
-        const data = snap.data();
-        // Replace local cart with Firestore cart
-        cart = Array.isArray(data.items) ? data.items : [];
-      } else {
-        // Create an empty cart document for new users
-        await setDoc(cartDocRef, { items: [] });
-        cart = [];
-      }
-      // Save to localStorage for offline persistence
-      localStorage.setItem('corewellCart', JSON.stringify(cart));
-      updateCartCount();
-    } catch (error) {
-      console.error('Failed to load cart from Firestore:', error);
+    const snap = await getDoc(doc(db, 'carts', user.uid));
+    if (snap.exists()) {
+      const data = snap.data();
+      cart = Array.isArray(data.items) ? data.items : [];
+    } else {
+      await setDoc(doc(db, 'carts', user.uid), { items: [] });
+      cart = [];
     }
-  }
+    localStorage.setItem('corewellCart', JSON.stringify(cart));
+    updateCartCount();
+  } catch (e) { console.error('Cart load failed:', e); }
+}
 
-  /**
-   * Synchronise the current cart to Firestore for the authenticated user.
-   * This writes the array of items to the user’s cart document.
-   */
-  async function syncCartToFirestore() {
-    const user = auth.currentUser;
-    if (!user) return;
-    try {
-      await setDoc(doc(db, 'carts', user.uid), { items: cart });
-    } catch (error) {
-      console.error('Failed to sync cart to Firestore:', error);
-    }
-  }
-
-  // Update cart count indicator
-  const cartCountEl = document.getElementById('cart-count');
-  function updateCartCount() {
-    if (!cartCountEl) return;
-    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
-    cartCountEl.textContent = total;
-  }
-  updateCartCount();
-
-  // Bind add to cart buttons
-  document.querySelectorAll('.add-to-cart').forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      const id = event.currentTarget.dataset.id;
-      const product = products.find((p) => p.id === id);
+// ─── ADD TO CART ──────────────────────────────────────────────────
+function bindAddToCart() {
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = e.currentTarget.dataset.id;
+      const product = PRODUCTS.find(p => p.id === id);
       if (!product) return;
-      const existing = cart.find((item) => item.id === id);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ ...product, quantity: 1 });
-      }
+      const existing = cart.find(i => i.id === id);
+      if (existing) { existing.quantity += 1; }
+      else { cart.push({ ...product, quantity: 1 }); }
       localStorage.setItem('corewellCart', JSON.stringify(cart));
       updateCartCount();
-      alert(`${product.name} added to cart.`);
-
-      // Persist cart to Firestore if user is logged in
+      showToast(`${product.name} added to cart 🛒`);
       syncCartToFirestore();
     });
   });
+}
 
-  // Authentication: update the login/logout link based on Firebase auth state
-  // Helper to update the login/logout link. Because the header is loaded
-  // asynchronously, always query for the link when updating state.
-  function setLoggedOut() {
-    const link = document.querySelector('.main-nav a[href="login.html"], .main-nav a[href="#logout"]');
-    if (link) {
+// ─── AUTH STATE ───────────────────────────────────────────────────
+function updateAuthLink(user) {
+  const links = document.querySelectorAll('#auth-link, #mobile-auth-link');
+  links.forEach(link => {
+    if (!link) return;
+    if (user) {
+      link.textContent = 'Logout';
+      link.setAttribute('href', '#logout');
+    } else {
       link.textContent = 'Login';
       link.setAttribute('href', 'login.html');
     }
-  }
-  function setLoggedIn() {
-    const link = document.querySelector('.main-nav a[href="login.html"], .main-nav a[href="#logout"]');
-    if (link) {
-      link.textContent = 'Logout';
-      link.setAttribute('href', '#logout');
-    }
+  });
+}
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────
+function initScrollReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('vis'), i * 55);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+// ─── STICKY NAV ───────────────────────────────────────────────────
+function initNav() {
+  const header = document.getElementById('site-header');
+  if (!header) return;
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
+  // Mobile toggle
+  const toggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      const spans = toggle.querySelectorAll('span');
+      if (mobileNav.classList.contains('open')) {
+        spans[0].style.transform = 'rotate(45deg) translate(4px,4px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(4px,-4px)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+      }
+    });
   }
 
-  // Listen for auth state changes
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoggedIn();
-      // Load the user’s cart from Firestore on login
-      loadUserCart(user);
-    } else {
-      setLoggedOut();
-    }
+  // Active link
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.main-nav a').forEach(a => {
+    const href = (a.getAttribute('href') || '').split('#')[0];
+    a.classList.toggle('active', href === path);
+  });
+}
+
+// ─── TESTIMONIALS ─────────────────────────────────────────────────
+let tIdx = 0;
+window.scrollTestimonials = function(dir) {
+  const inner = document.getElementById('testimonialsInner');
+  if (!inner) return;
+  const cards = inner.querySelectorAll('.testimonial');
+  if (!cards.length) return;
+  tIdx = Math.max(0, Math.min(tIdx + dir, cards.length - 1));
+  const w = cards[0].offsetWidth + 22;
+  inner.style.transform = `translateX(-${tIdx * w}px)`;
+};
+
+// ─── FOOTER YEAR ─────────────────────────────────────────────────
+function setYear() {
+  const el = document.getElementById('year');
+  if (el) el.textContent = new Date().getFullYear();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // These run immediately; header/footer load async via components.js
+  updateCartCount();
+  setYear();
+  initScrollReveal();
+
+  // Re-run bindings after header is injected
+  const headerPlaceholder = document.getElementById('header');
+  if (headerPlaceholder) {
+    new MutationObserver(() => {
+      initNav();
+      updateCartCount();
+      updateAuthLink(auth.currentUser);
+      bindAddToCart();
+    }).observe(headerPlaceholder, { childList: true });
+  }
+
+  // Also bind add-to-cart on page products (not in header)
+  bindAddToCart();
+
+  // Auth
+  onAuthStateChanged(auth, user => {
+    updateAuthLink(user);
+    if (user) loadUserCart(user);
   });
 
-  document.addEventListener('click', async (e) => {
-    // Delegate logout click handler: if the user clicks on a link with href="#logout"
+  // Logout delegation
+  document.addEventListener('click', async e => {
     const target = e.target.closest('a[href="#logout"]');
     if (!target) return;
     e.preventDefault();
     try {
       await signOut(auth);
-      alert('You have been logged out.');
-    } catch (err) {
-      alert('Error logging out.');
-    }
+      showToast('You have been signed out.');
+    } catch { showToast('Error signing out.'); }
   });
-
-  // Highlight the active navigation link based on the current pathname
-  function highlightActiveNav() {
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.main-nav a');
-    navLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (!href) return;
-      // Compare file names (ignore hash fragments)
-      const page = href.split('#')[0];
-      if (page === path) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-  }
-  highlightActiveNav();
 });
